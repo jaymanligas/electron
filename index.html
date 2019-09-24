@@ -11,6 +11,11 @@
 
   <body>
     <div class="container-fluid">
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+          Hello, world! This is a toast message.
+        </div>
+      </div>
       <div class="row justify-content-center">
         <h1 class="mt-5">RIVERBED</h1>
         <div class="w-100"></div>
@@ -24,8 +29,9 @@
           </button>
         </form>
         <div class="w-100"></div>
-        <div class="col-md-5 col-sm-6 col-xs-12">
+        <div class="col-md-8 col-sm-8 col-xs-12">
           <div id="chart"></div>
+          <div class="w-100"></div>
           <div id="question">
             <h1></h1>
           </div>
@@ -35,6 +41,7 @@
 
     <script type="text/javascript" charset="utf-8">
       var d3 = require("d3");
+      var $ = require("jquery");
       var padding = { top: 20, right: 40, bottom: 0, left: 0 },
         w = 500 - padding.left - padding.right,
         h = 500 - padding.top - padding.bottom,
@@ -45,108 +52,129 @@
         oldpick = [],
         color = d3.scale.category20(); //category20c()
       var data = [
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-        { label: "Pen", value: 100, question: "Congrats!!! It's a PEN!!!!" },
-
-        { label: " GOOGLE JOB", value: 1, question: "Whoa! a google job!!" } //comma
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Pen", value: 1, question: "Congrats!!! It's a PEN!!!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Notebook", value: 1, question: "Notebook S10+!!" },
+        { label: "Jacket", value: 1, question: "Jacket!!" },
+        { label: "Jacket", value: 1, question: "Jacket!!" },
+        { label: "Laptop Bag", value: 1, question: "Laptop Bag!!" }
       ];
       var svg = d3
         .select("#chart")
@@ -232,7 +260,10 @@
             //populate question
             d3.select("#question h1").text(data[picked].question);
             oldrotation = rotation;
-
+            $("#question h1")
+              .show()
+              .delay(5000)
+              .fadeOut(1000);
             container.on("click", spin);
           });
       }
@@ -284,10 +315,9 @@
         return array;
       }
     </script>
-
-    <script src="./js/jquery.min.js"></script>
     <script>
       require("./index.js");
+      require("bootstrap");
     </script>
   </body>
 </html>
