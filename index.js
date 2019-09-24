@@ -13,7 +13,7 @@ filename = "registered.csv";
 pathName = path.join(__dirname, "Files");
 
 theForm.on("submit", function(e) {
-  e.preventDefault();
+  // e.preventDefault();
   console.log(e);
 });
 
@@ -24,13 +24,17 @@ btnSubmit.addEventListener("click", function() {
       console.log("no file");
       data = "";
     }
-    let contents =
-      data +
-      `${namex.value},${company.value},${designation.value},${email.value}\n`;
+    let contents = data + `${namex.value},${company.value},${designation.value},${email.value}\n`;
     fs.writeFile(file, contents, function(err) {
       if (!!err) {
         return console.error(err);
       }
+      $("#question h1").text(`Thank You ${namex.value}!!`);
+      $("#question h1")
+        .show(1)
+        .delay(5000)
+        .hide(1);
+      $(".form-signin").trigger("reset");
       console.log("created");
     });
   });

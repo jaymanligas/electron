@@ -11,19 +11,14 @@
 
   <body>
     <div class="container-fluid">
-      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-body">
-          Hello, world! This is a toast message.
-        </div>
-      </div>
       <div class="row justify-content-center">
         <h1 class="mt-5">RIVERBED</h1>
         <div class="w-100"></div>
-        <form onsubmit="" action="#" class="form-signin  col-md-5 col-sm-6 col-xs-12">
-          <input class="form-control mb-3" type="text" name="name" id="namex" placeholder="Full Name" />
+        <form action="#" class="form-signin  col-md-5 col-sm-6 col-xs-12">
+          <input class="form-control mb-3" type="text" name="name" id="namex" required placeholder="Full Name" />
           <input class="form-control mb-3" type="text" name="company" id="company" placeholder="Company" />
           <input class=" mb-3 form-control" type="text" name="designation" id="designation" placeholder="Designation" />
-          <input class="form-control mb-3" type="text" name="mail" id="email" placeholder="E-mail" />
+          <input class="form-control mb-3" type="email" name="mail" id="email" placeholder="E-mail" />
           <button id="submit" type="button" class="btn btn-lg btn-primary btn-block">
             Submit
           </button>
